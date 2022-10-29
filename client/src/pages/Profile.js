@@ -50,12 +50,12 @@ class Profile extends React.Component {
             })}
           </div>
         ) : (
-          <div className="col-12 h-100 d-flex align-items-center justify-content-center">
+          <div className="col-12 mt-5 pt-5 h-100 d-flex align-items-center justify-content-center">
             <div>
-              <h1>User Not Found</h1>
+              <h1 className="mb-3 display-4 fw-bold">User Not Found</h1>
               <div className="text-center">
                 <Link to="/">
-                  <button className="btn btn-outline-primary">Go Home</button>
+                  <button className="btn btn-outline-primary"><span className="display-6 fw-light">Go Home</span></button>
                 </Link>
               </div>
             </div>
