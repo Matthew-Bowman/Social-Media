@@ -22,9 +22,11 @@ class Connection {
     });
 
     // PUBLIC METHODS
+
+    // METHOD: Get user from user table matching usernames
     this.GetUserByUsername = (username) => {
       // SETUP database query
-      const query = `SELECT username FROM user WHERE username=?`;
+      const query = `SELECT * FROM user WHERE username=?`;
       const inserts = [username];
       const sql = mysql.format(query, inserts);
 
@@ -36,6 +38,23 @@ class Connection {
           else resolve(res);
         });
       });
+    };
+
+    // METHOD: Get posts related to a user
+    this.GetPostsByUserID = (userID) => {
+      // SETUP database query
+      const query = `SELECT * FROM post WHERE user_id=?`;
+      const inserts = [userID];
+      const sql = mysql.format(query, inserts);
+
+      // RETURN results
+      return new Promise((resolve, reject) => {
+        // PERFORM Query
+        this.connection.query(sql, (err, res) => {
+          if (err) reject(err);
+          else resolve(res);
+        })
+      })
     };
   }
 }
