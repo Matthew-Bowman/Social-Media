@@ -28,7 +28,7 @@ router.get(`/posts`, (req, res, next) => {
           // GET user Posts and respond to request
           database
             .GetPostsByUserID(user.user_id)
-            .then((result) => res.json({ code: 200, message: result }))
+            .then((postsResult) => res.json({ code: 200, body: {posts: postsResult, username: result[0].username} }))
             .catch((err) => res.json({code: 500, message: "Internal Server Error"}));
         }
       })
