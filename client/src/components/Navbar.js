@@ -14,7 +14,7 @@ function Navbar() {
             <form
               className="d-flex gap-2 mx-auto"
               role="search"
-              onSubmit="/profile"
+              action="/profile"
             >
               <div>
                 <input
