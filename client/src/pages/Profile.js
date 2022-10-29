@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import Post from "../components/Post";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 class Profile extends React.Component {
   // INITIALISE posts variable
@@ -36,11 +37,14 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid p-5 vh-100">
+      <div className="container-fluid p-0">
+        {/* SHOW Navbar */}
+        <Navbar />
+
         {/* SHOW Information */}
         {this.state.code === 200 ? (
-          <div className="row gy-3 d-flex flex-column align-items-center text-center">
-            <h1>{this.state.username}'s Profile</h1>
+          <div className="row mt-5 mx-5 gy-3 d-flex flex-column align-items-center text-center">
+            <h1>{this.state.username}'s Posts</h1>
             {this.state.posts.map((item, index) => {
               return <Post content={item.content} timestamp={item.timestamp} />;
             })}
