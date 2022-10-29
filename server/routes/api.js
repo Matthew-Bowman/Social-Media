@@ -19,30 +19,34 @@ router.get(`/posts`, (req, res, next) => {
       .GetUserByUsername(username)
       .then((result) => {
         // CHECK if user exists
-        if (result.length <= 0)
+        if (result.length <= 0) {
+          res.status(404);
           res.json({ code: 404, message: "User Not Found" });
-        else {
+        } else {
           // INIT user var
           const user = result[0];
 
           // GET user Posts and respond to request
           database
             .GetPostsByUserID(user.user_id)
-            .then((postsResult) =>
+            .then((postsResult) => {
+              res.status(200);
               res.json({
                 code: 200,
                 message: "OK",
                 body: { posts: postsResult, username: result[0].username },
-              })
-            )
-            .catch((err) =>
-              res.json({ code: 500, message: "Internal Server Error" })
-            );
+              });
+            })
+            .catch((err) => {
+              res.status(500);
+              res.json({ code: 500, message: "Internal Server Error" });
+            });
         }
       })
-      .catch((err) =>
-        res.json({ code: 500, message: "Internal Server Error" })
-      );
+      .catch((err) => {
+        res.status(500);
+        res.json({ code: 500, message: "Internal Server Error" });
+      });
   }
 });
 
