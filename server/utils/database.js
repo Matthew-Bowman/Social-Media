@@ -22,6 +22,21 @@ class Connection {
     });
 
     // PUBLIC METHODS
+    this.GetUserByUsername = (username) => {
+      // SETUP database query
+      const query = `SELECT username FROM user WHERE username=?`;
+      const inserts = [username];
+      const sql = mysql.format(query, inserts);
+
+      // RETURN results
+      return new Promise((resolve, reject) => {
+        // PERFORM Query
+        this.connection.query(sql, (err, res) => {
+          if (err) reject(err);
+          else resolve(res);
+        });
+      });
+    };
   }
 }
 
