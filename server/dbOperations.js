@@ -1,10 +1,9 @@
 // REQUIRE Modules
 const mysql = require("mysql2");
 
-// STORE Database Operations
-class dbOperations {
-  constructor() {}
+// CLASS: Database Connection
+class Connection {
+  constructor() {console.log("Test")}
 }
 
-// EXPORT dbOperations
-export default dbOperations;
+module.exports = Connection;
