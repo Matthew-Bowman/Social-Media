@@ -32,16 +32,16 @@ function Navbar() {
             </form>
           </div>
           <div className="col-4 d-flex justify-content-end">
-            <div class="dropdown">
+            <div className="dropdown">
               <button
-                class="btn btn-outline-light dropdown-toggle align-items-center d-flex gap-1"
+                className="btn btn-outline-light dropdown-toggle align-items-center d-flex gap-1"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Account
               </button>
-              <ul class="dropdown-menu dropdown-menu-end">
+              <ul className="dropdown-menu dropdown-menu-end">
                 <li>
                   <Link className="dropdown-item" to="/settings">
                     <span>Settings</span>
