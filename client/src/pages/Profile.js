@@ -55,7 +55,7 @@ class Profile extends React.Component {
               <h1 className="mb-3 display-4 fw-bold">User Not Found</h1>
               <div className="text-center">
                 <Link to="/">
-                  <button className="btn btn-outline-primary"><span className="display-6 fw-light">Go Home</span></button>
+                  <button className="btn btn-outline-primary"><span className="fs-2 fw-light">Go Home</span></button>
                 </Link>
               </div>
             </div>
