@@ -20,6 +20,8 @@ class Connection {
       database: this.database,
       port: this.port,
     });
+
+    // PUBLIC METHODS
   }
 }
 
