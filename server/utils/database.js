@@ -43,7 +43,7 @@ class Connection {
     // METHOD: Get posts related to a user
     this.GetPostsByUserID = (userID) => {
       // SETUP database query
-      const query = `SELECT * FROM post WHERE user_id=?`;
+      const query = `SELECT * FROM post WHERE user_id=? ORDER BY post_id DESC`;
       const inserts = [userID];
       const sql = mysql.format(query, inserts);
 
