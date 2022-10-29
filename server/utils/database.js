@@ -1,5 +1,6 @@
 // REQUIRE Modules
 const mysql = require("mysql2");
+const bcrypt = require("bcryptjs");
 
 // CLASS: Database Connection
 class Connection {
@@ -53,8 +54,28 @@ class Connection {
         this.connection.query(sql, (err, res) => {
           if (err) reject(err);
           else resolve(res);
-        })
-      })
+        });
+      });
+    };
+
+    // METHOD: Adds a user to the database
+    this.CreateUser = (username, password) => {
+      // SETUP database query
+      const query = "INSERT INTO user (username, password) VALUES (?, ?)";
+      const inserts = [
+        username,
+        bcrypt.hashSync(password, bcrypt.genSaltSync(5)),
+      ];
+      const sql = mysql.format(query, inserts);
+
+      // RETURN results
+      return new Promise((resolve, reject) => {
+        // PERFORM Query
+        this.connection.query(sql, (err, res) => {
+          if (err) reject(err);
+          else resolve(res);
+        });
+      });
     };
   }
 }
