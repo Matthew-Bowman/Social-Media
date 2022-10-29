@@ -31,7 +31,35 @@ function Navbar() {
               </button>
             </form>
           </div>
-          <div className="col-4"></div>
+          <div className="col-4 d-flex justify-content-end">
+            <div class="dropdown">
+              <button
+                class="btn btn-outline-light dropdown-toggle align-items-center d-flex gap-1"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Account
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <Link className="dropdown-item" to="/settings">
+                    <span>Settings</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/login">
+                    <span>Login</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/signup">
+                    <span>Signup</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </nav>
     </div>
