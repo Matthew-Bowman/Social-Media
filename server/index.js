@@ -3,9 +3,13 @@ require(`dotenv`).config();
 const express = require(`express`);
 const app = express();
 const cors = require("cors");
+const Connection = require(`./dbOperations`)
 
 // INITIALISE Variables
 const PORT = process.env.PORT
+
+// INSTANTIATE DB Connection
+const connection = new Connection();
 
 // SETUP Middleware
 app.use(cors());
