@@ -28,11 +28,53 @@ router.get(`/posts`, (req, res, next) => {
           // GET user Posts and respond to request
           database
             .GetPostsByUserID(user.user_id)
-            .then((postsResult) => res.json({ code: 200, message: "OK", body: {posts: postsResult, username: result[0].username} }))
-            .catch((err) => res.json({code: 500, message: "Internal Server Error"}));
+            .then((postsResult) =>
+              res.json({
+                code: 200,
+                message: "OK",
+                body: { posts: postsResult, username: result[0].username },
+              })
+            )
+            .catch((err) =>
+              res.json({ code: 500, message: "Internal Server Error" })
+            );
         }
       })
-      .catch((err) => res.json({ code: 500, message: "Internal Server Error" }));
+      .catch((err) =>
+        res.json({ code: 500, message: "Internal Server Error" })
+      );
+  }
+});
+
+router.post(`/users/create`, (req, res) => {
+  if (!req.body.username || !req.body.password)
+    res.json({ code: 404, message: "Username/Password not Provided" });
+  else {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    database
+      .GetUserByUsername(username)
+      .then((result) => {
+        if (result.length > 0) res.json({ code: 409, message: "Conflict" });
+        else {
+          if (username.length > 50)
+            res.json({ code: 413, message: "Payload Too Large" });
+          else {
+            database
+              .CreateUser(username, password)
+              .then((result) => {
+                res.json({ code: 201, message: "Created" });
+              })
+              .catch((err) =>
+                res.json({ code: 500, message: "Internal Server Error" })
+              );
+          }
+        }
+      })
+      .catch((err) =>
+        res.json({ code: 500, message: "Internal Server Error" })
+      );
   }
 });
 
