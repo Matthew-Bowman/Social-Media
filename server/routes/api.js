@@ -2,6 +2,7 @@
 const express = require(`express`);
 const router = express.Router();
 const Connection = require(`../utils/database`);
+const jwt = require("jsonwebtoken");
 
 // INSTANTIATE DB Connection
 const database = new Connection();
@@ -9,8 +10,10 @@ const database = new Connection();
 // REGISTER Route
 router.get(`/posts`, (req, res, next) => {
   // CHECK for username in querystring
-  if (!req.query.username) res.json({ code: 404, message: "No Username" });
-  else {
+  if (!req.query.username) {
+    res.status(404);
+    res.json({ code: 404, message: "No Username Provided" });
+  } else {
     // INITIALISE username variable
     let username = req.query.username;
 
@@ -79,6 +82,59 @@ router.post(`/users/create`, (req, res) => {
                 res.status(500);
                 res.json({ code: 500, message: "Internal Server Error" });
               });
+          }
+        }
+      })
+      .catch((err) => {
+        res.status(500);
+        res.json({ code: 500, message: "Internal Server Error" });
+      });
+  }
+});
+
+router.post("/users/authorize", (req, res) => {
+  if (!req.body.username || !req.body.password) {
+    res.status(404);
+    res.json({ code: 404, message: "Username/Password not Provided" });
+  } else {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    database
+      .GetUserByUsername(username)
+      .then((result) => {
+        if (result.length <= 0) {
+          res.status(401);
+          res.json({ code: 401, message: "Unauthorized" });
+        } else {
+          const authorized = database.AuthorizeUser(
+            password,
+            result[0].password
+          );
+          if (!authorized) {
+            res.status(401);
+            res.json({ code: 401, message: "Unauthorized" });
+          } else {
+            // GENERATE jsonwebtoken
+            const token = jwt.sign(
+              { id: result[0].user_id },
+              process.env.JWT_SECRET,
+              {
+                expiresIn: "300s",
+              }
+            );
+
+            // APPLY token to httponly cookie
+            res.cookie("auth_token", token, {
+              path: "/",
+              expires: new Date(Date.now() + 1000 * 300),
+              httpOnly: true,
+              sameSite: "lax",
+            });
+
+            // RESPOND to request
+            res.status(200);
+            res.json({ code: 200, message: "OK", body: { token: token } });
           }
         }
       })
