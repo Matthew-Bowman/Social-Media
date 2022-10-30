@@ -43,11 +43,6 @@ function Navbar() {
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
-                  <Link className="dropdown-item" to="/settings">
-                    <span>Settings</span>
-                  </Link>
-                </li>
-                <li>
                   <Link className="dropdown-item" to="/login">
                     <span>Login</span>
                   </Link>
