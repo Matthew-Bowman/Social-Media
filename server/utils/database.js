@@ -77,6 +77,11 @@ class Connection {
         });
       });
     };
+
+    // METHOD: Compares two passwords
+    this.AuthorizeUser = (password, hashedPassword) => {
+      return bcrypt.compareSync(password, hashedPassword);
+    }
   }
 }
 
