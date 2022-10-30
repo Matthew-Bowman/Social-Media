@@ -1,6 +1,29 @@
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../store";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function Navbar() {
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const dispatch = useDispatch();
+
+  const sendLogout = async () => {
+    const res = await axios.post("http://localhost:3001/api/me/logout", null, {
+      withCredentials: true,
+    });
+
+    if(res.status === 200) {
+      return res;
+    }
+
+    return new Error("Unable to logout, please try again!")
+  };
+
+  const handleLogout = () => {
+    sendLogout().then(() => dispatch(authActions.logout()));
+  };
+
   return (
     <div>
       <nav className="navbar bg-dark navbar-dark py-2">
@@ -42,16 +65,30 @@ function Navbar() {
                 Account
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
-                <li>
-                  <Link className="dropdown-item" to="/login">
-                    <span>Login</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/signup">
-                    <span>Signup</span>
-                  </Link>
-                </li>
+                {!isLoggedIn && (
+                  <>
+                    <li>
+                      <Link className="dropdown-item" to="/login">
+                        <span>Login</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/signup">
+                        <span>Signup</span>
+                      </Link>
+                    </li>
+                  </>
+                )}
+
+                {isLoggedIn && (
+                  <>
+                    <li>
+                      <span className="dropdown-item" onClick={handleLogout}>
+                        Logout
+                      </span>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
