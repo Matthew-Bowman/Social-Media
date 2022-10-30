@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -7,6 +8,8 @@ import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 
 function App() {
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
   return (
     <BrowserRouter>
       <Routes>
