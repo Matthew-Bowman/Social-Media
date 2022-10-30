@@ -4,6 +4,7 @@ const express = require(`express`);
 const router = express.Router();
 const Connection = require(`../utils/database`);
 const jwt = require("jsonwebtoken");
+const authenticate = require("../utils/authenticate");
 
 // INSTANTIATE DB Connection
 const database = new Connection();
@@ -121,12 +122,14 @@ router.post("/users/authorize", (req, res) => {
               { id: result[0].user_id },
               process.env.JWT_SECRET,
               {
-                expiresIn: "300s",
+                expiresIn: "60s",
               }
             );
 
+            if (req.cookies[`auth_token`]) req.cookies[`auth_token`] = ``;
+
             // APPLY token to httponly cookie
-            res.cookie("auth_token", token, {
+            res.cookie(`auth_token`, token, {
               path: "/",
               expires: new Date(Date.now() + 1000 * 300),
               httpOnly: true,
@@ -144,6 +147,13 @@ router.post("/users/authorize", (req, res) => {
         res.json({ code: 500, message: "Internal Server Error" });
       });
   }
+});
+
+router.post("/me/logout", authenticate, (req, res) => {
+  res.clearCookie("auth_token");
+
+  res.status(200);
+  res.json({ code: 200, message: "OK" });
 });
 
 // EXPORT Routes
