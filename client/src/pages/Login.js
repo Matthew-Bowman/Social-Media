@@ -3,6 +3,8 @@ import Alert from "../components/Alert";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../store";
 
 let state = {
   username: "",
@@ -13,6 +15,7 @@ let state = {
 function Login() {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +32,7 @@ function Login() {
           password: state.password,
         })
         .then((result) => {
+          dispatch(authActions.login());
           navigate("/");
         })
         .catch((err) => {
@@ -52,7 +56,7 @@ function Login() {
               setError(true);
               break;
             default:
-              state.errorText = "Something went wrong, please try again!"
+              state.errorText = "Something went wrong, please try again!";
               setError(true);
               break;
           }
