@@ -51,6 +51,10 @@ function Signup() {
               state.errorText = "Please fill out all the fields!";
               setError(true);
               break;
+            default:
+              state.errorText = "Something went wrong, please try again!";
+              setError(true);
+              break;
           }
         });
     }
