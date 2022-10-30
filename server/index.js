@@ -3,6 +3,7 @@ require(`dotenv`).config();
 const express = require(`express`);
 const app = express();
 const cors = require("cors");
+const cookies = require("cookie-parser");
 
 // GET routes
 const api = require(`./routes/api`);
@@ -14,6 +15,7 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookies());
 
 // SETUP Routes
 app.use(`/api`, api);
