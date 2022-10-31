@@ -189,7 +189,6 @@ router.post("/me/posts", authenticate, (req, res) => {
   const token = req.cookies.auth_token;
   const user = jwt.verify(token, process.env.JWT_SECRET);
   const content = req.body.content;
-  console.log(req.body.content);
 
   database
     .CreatePost(user.id, content)
