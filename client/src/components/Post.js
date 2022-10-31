@@ -1,6 +1,10 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
+import EditModal from "./EditModal";
 
-function Post({ content, timestamp, id, alterable = false }) {
+function Post({ originalContent, timestamp, id, alterable = false }) {
+  const [content, setContent] = useState("");
+
   const handleDelete = async (e) => {
     try {
       const response = await axios.delete(
@@ -13,6 +17,22 @@ function Post({ content, timestamp, id, alterable = false }) {
       // HANDLE Error
     }
   };
+
+  const handleEdit = async (e, updatedContent) => {
+    try {
+      const response = await axios.put("http://localhost:3001/api/me/posts", {
+        post_id: id,
+        content: updatedContent,
+      });
+      if (response.status === 200) setContent(updatedContent);
+    } catch (err) {
+      // HANDLE Error
+    }
+  };
+
+  useEffect(() => {
+    setContent(originalContent);
+  }, []);
 
   return (
     <div className="card text-start col-12 col-md-8 col-lg-6 col-xl-5 shadow">
@@ -29,7 +49,18 @@ function Post({ content, timestamp, id, alterable = false }) {
               >
                 Delete
               </button>
-              <button className="btn btn-outline-primary px-3">Edit</button>
+              <button
+                className="btn btn-outline-primary px-3"
+                data-bs-toggle="modal"
+                data-bs-target={`#edit-modal-${id}`}
+              >
+                Edit
+              </button>
+              <EditModal
+                id={id}
+                existingContent={originalContent}
+                handleEdit={handleEdit}
+              />
             </div>
           )}
         </div>
