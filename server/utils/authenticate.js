@@ -14,8 +14,7 @@ const authenticate = (req, res, next) => {
       res.json({ code: 404, message: "Missing Token Cookie" });
     } else {
       // VERIFY jsonwebtoken
-      const token = req.cookies["auth_token"]
-      console.log(token);
+      const token = req.cookies["auth_token"];
       jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
           res.status(401);
