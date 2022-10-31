@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
+import CreatePost from "./pages/CreatePost";
 import Navbar from "./components/Navbar";
 import React from "react";
 
@@ -35,6 +36,11 @@ function App() {
           exact
           path="/profile/:username"
           element={isLoggedIn ? <Profile /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/create"
+          element={isLoggedIn ? <CreatePost /> : <Navigate to="/login" />}
         />
       </Routes>
     </BrowserRouter>
