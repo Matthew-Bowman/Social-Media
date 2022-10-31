@@ -185,5 +185,24 @@ router.get("/me/posts", authenticate, (req, res) => {
     });
 });
 
+router.post("/me/posts", authenticate, (req, res) => {
+  const token = req.cookies.auth_token;
+  const user = jwt.verify(token, process.env.JWT_SECRET);
+  const content = req.body.content;
+  console.log(req.body.content);
+
+  database
+    .CreatePost(user.id, content)
+    .then((result) => {
+      res.status(201);
+      res.json({ code: 201, message: "Created" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500);
+      res.json({ code: 500, message: "Internal Server Error" });
+    });
+});
+
 // EXPORT Routes
 module.exports = router;
