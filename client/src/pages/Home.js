@@ -45,7 +45,7 @@ function Home() {
         {posts.map((item, index) => {
           return (
             <Post
-              content={item.content}
+              originalContent={item.content}
               timestamp={item.timestamp}
               id={item.post_id}
               alterable={true}
