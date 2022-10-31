@@ -12,12 +12,25 @@ A CRUD Application built with using the MERN Stack.
 # Getting Started
 ---
 ## 1. Clone Repository
-## 2. Create MySQL Database
+
+## 2. Install Dependencies
+
+### Install Client Dependencies
+Open your Terminal
+Navigate into the `client` directory
+Run: `npm install`
+
+### Install Server Dependencies
+Open your Terminal
+Navigate into the `server` directory
+Run: `npm install`
+
+## 3. Create MySQL Database
 
 ### Entity Relationship Diagram
 ![Entity Relationship Diagram](https://i.imgur.com/W8jpMcQ.png "High Level ERD")
 
-## 3. Assign Environment Variables
+## 4. Assign Environment Variables
 Create a `.env` file inside of the projects `server` directory.
 
 ### Example .env File
@@ -31,12 +44,12 @@ DB_PORT=3306 # Stores the port MySQL is running on
 JWT_SECRET=RANDOM_STRING # Stores a secret for jsonwebtoken
 ```
 
-## 4. Start Server
+## 5. Start Server
 Open a terminal and navigate into the project's `server` directory.
 Paste: ```npm start```
 This will start the server
 
-## 5. Start Client
+## 6. Start Client
 Open another terminal (keeping the previous one open) and navigate into the client directory
 Paste: ```npm start```
 This will start the client and open your default browser pointing to the hosted client
