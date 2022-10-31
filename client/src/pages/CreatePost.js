@@ -46,6 +46,7 @@ function CreatePost() {
               id="content"
               aria-describedby="content"
               onChange={handleChange}
+              maxLength="255"
             />
           </div>
           <button
