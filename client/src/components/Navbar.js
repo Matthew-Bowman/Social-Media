@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store";
 import axios from "axios";
 import { useState } from "react";
-axios.defaults.withCredentials = true;
 
 function Navbar() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
