@@ -12,6 +12,11 @@ A CRUD Application built with using the MERN Stack.
 # Getting Started
 ---
 ## 1. Clone Repository
+Open your Terminal
+
+Navigate to desired directory
+
+Run: `git clone https://github.com/Matthew-Bowman/Social-Media.git`
 
 ## 2. Install Dependencies
 
