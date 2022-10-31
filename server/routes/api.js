@@ -146,6 +146,22 @@ router.post("/users/authorize", (req, res) => {
   }
 });
 
+router.get("/me", authenticate, (req, res) => {
+  const token = req.cookies.auth_token;
+  const user = jwt.verify(token, process.env.JWT_SECRET);
+
+  database
+    .GetUserByUserID(user.id)
+    .then((result) => {
+      res.status(200);
+      res.json({ code: 200, message: "OK", body: { user: result[0] } });
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json({ code: 500, message: "Internal Server Error" });
+    });
+});
+
 router.post("/me/logout", authenticate, (req, res) => {
   res.clearCookie("auth_token");
 
