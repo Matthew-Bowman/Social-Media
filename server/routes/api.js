@@ -203,5 +203,41 @@ router.post("/me/posts", authenticate, (req, res) => {
     });
 });
 
+router.delete("/me/posts", authenticate, (req, res) => {
+  const token = req.cookies.auth_token;
+  const user = jwt.verify(token, process.env.JWT_SECRET);
+  const post_id = req.body.post_id;
+
+  database
+    .GetUserIDbyPostID(post_id)
+    .then((result) => {
+      if (result.length <= 0) {
+        res.status(404);
+        res.json({ code: 404, message: "Not Found" });
+      } else {
+        const user_id = result[0].user_id;
+        if (user_id !== user.id) {
+          res.status(403);
+          res.json({ code: 403, message: "Forbidden" });
+        } else {
+          database
+            .DeletePostByPostID(post_id)
+            .then((result) => {
+              res.status(200);
+              res.json({ code: 200, message: "Success" });
+            })
+            .catch((err) => {
+              res.status(500);
+              res.json({ code: 500, message: "Internal Server Error" });
+            });
+        }
+      }
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json({ code: 500, message: "Internal Server Error" });
+    });
+});
+
 // EXPORT Routes
 module.exports = router;
