@@ -38,7 +38,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="container-fluid p-0">
+    <div className="container-fluid p-0 py-5">
       <div className="row mt-5 mx-5 gy-3 d-flex flex-column align-items-center text-center">
         <h1>Hello, {username}</h1>
         <CreatePost />
