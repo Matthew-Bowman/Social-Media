@@ -37,15 +37,6 @@ function Home() {
     loadUsername();
   }, []);
 
-  const handleDelete = (e) => {
-    try {
-      console.log(e.target);
-      // const response = await axios.delete("http://localhost:3001/api/me/posts", )
-    } catch (err) {
-      // HANDLE Error
-    }
-  }
-
   return (
     <div className="container-fluid p-0 py-5">
       <div className="row mt-5 mx-5 gy-3 d-flex flex-column align-items-center text-center">
