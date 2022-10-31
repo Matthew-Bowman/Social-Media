@@ -42,6 +42,23 @@ class Connection {
       });
     };
 
+    // METHOD: Get user from user table matching id
+    this.GetUserByUserID = (id) => {
+      // SETUP database query
+      const query = `SELECT username,user_id FROM user WHERE user_id=?`;
+      const inserts = [id];
+      const sql = mysql.format(query, inserts);
+
+      // RETURN results
+      return new Promise((resolve, reject) => {
+        // PERFORM Query
+        this.connection.query(sql, (err, res) => {
+          if (err) reject(err);
+          else resolve(res);
+        });
+      });
+    };
+
     // METHOD: Get posts related to a user
     this.GetPostsByUserID = (userID) => {
       // SETUP database query
