@@ -1,27 +1,45 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store";
 import axios from "axios";
+import { useState } from "react";
 axios.defaults.withCredentials = true;
 
 function Navbar() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [inputs, setInputs] = useState({
+    username: "",
+  });
 
   const sendLogout = async () => {
     const res = await axios.post("http://localhost:3001/api/me/logout", null, {
       withCredentials: true,
     });
 
-    if(res.status === 200) {
+    if (res.status === 200) {
       return res;
     }
 
-    return new Error("Unable to logout, please try again!")
+    return new Error("Unable to logout, please try again!");
   };
 
   const handleLogout = () => {
     sendLogout().then(() => dispatch(authActions.logout()));
+  };
+
+  const handleChange = (e) => {
+    setInputs((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`profile/${inputs.username}`);
   };
 
   return (
@@ -37,7 +55,7 @@ function Navbar() {
             <form
               className="d-flex gap-2 mx-auto"
               role="search"
-              action="/profile"
+              onSubmit={handleSearch}
             >
               <div>
                 <input
@@ -47,6 +65,8 @@ function Navbar() {
                   placeholder="Search Users"
                   aria-label="Search Users"
                   name="username"
+                  onChange={handleChange}
+                  autoComplete="off"
                 />
               </div>
               <button className="btn btn-outline-light" type="submit">
