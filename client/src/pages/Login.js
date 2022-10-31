@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import Alert from "../components/Alert";
 import { useState } from "react";
 import axios from "axios";
@@ -71,8 +70,6 @@ function Login() {
 
   return (
     <div>
-      {/* SHOW Navbar */}
-      <Navbar />
       <div className="container py-5 mt-5">
         <form
           className="col-lg-4 mx-auto bg-light shadow p-5 rounded border"
