@@ -156,6 +156,23 @@ class Connection {
         });
       });
     };
+
+    // METHOD: updates a post's content based on the post_id
+    this.UpdatePostByPostID = (postID, content) => {
+      // SETUP database query
+      const query = "UPDATE post SET content=? WHERE post_id=?";
+      const inserts = [content, postID];
+      const sql = mysql.format(query, inserts);
+
+      // RETURN results
+      return new Promise((resolve, reject) => {
+        // PERFORM Query
+        this.connection.query(sql, (err, res) => {
+          if (err) reject(err);
+          else resolve(res);
+        });
+      });
+    };
   }
 }
 
