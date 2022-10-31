@@ -13,6 +13,7 @@ A CRUD Application built with using the MERN Stack.
 ---
 ## 0. Prerequisites
 NodeJS
+
 MySQL
 
 ## 1. Clone Repository
