@@ -17,12 +17,16 @@ A CRUD Application built with using the MERN Stack.
 
 ### Install Client Dependencies
 Open your Terminal
+
 Navigate into the `client` directory
+
 Run: `npm install`
 
 ### Install Server Dependencies
 Open your Terminal
+
 Navigate into the `server` directory
+
 Run: `npm install`
 
 ## 3. Create MySQL Database
@@ -46,10 +50,14 @@ JWT_SECRET=RANDOM_STRING # Stores a secret for jsonwebtoken
 
 ## 5. Start Server
 Open a terminal and navigate into the project's `server` directory.
+
 Paste: ```npm start```
+
 This will start the server
 
 ## 6. Start Client
 Open another terminal (keeping the previous one open) and navigate into the client directory
+
 Paste: ```npm start```
+
 This will start the client and open your default browser pointing to the hosted client
