@@ -121,9 +121,7 @@ router.post("/users/authorize", (req, res) => {
             const token = jwt.sign(
               { id: result[0].user_id },
               process.env.JWT_SECRET,
-              {
-                expiresIn: "60s",
-              }
+              {}
             );
 
             if (req.cookies[`auth_token`]) req.cookies[`auth_token`] = ``;
@@ -131,7 +129,6 @@ router.post("/users/authorize", (req, res) => {
             // APPLY token to httponly cookie
             res.cookie(`auth_token`, token, {
               path: "/",
-              expires: new Date(Date.now() + 1000 * 300),
               httpOnly: true,
               sameSite: "lax",
             });
@@ -154,6 +151,22 @@ router.post("/me/logout", authenticate, (req, res) => {
 
   res.status(200);
   res.json({ code: 200, message: "OK" });
+});
+
+router.get("/me/posts", authenticate, (req, res) => {
+  const token = req.cookies.auth_token;
+  const user = jwt.verify(token, process.env.JWT_SECRET);
+
+  database
+    .GetPostsByUserID(user.id)
+    .then((result) => {
+      res.status(200);
+      res.json({ code: 200, message: "OK", body: { posts: result } });
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json({ code: 500, message: "Internal Server Error" });
+    });
 });
 
 // EXPORT Routes
