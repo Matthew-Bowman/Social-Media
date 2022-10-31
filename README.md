@@ -51,13 +51,13 @@ JWT_SECRET=RANDOM_STRING # Stores a secret for jsonwebtoken
 ## 5. Start Server
 Open a terminal and navigate into the project's `server` directory.
 
-Paste: ```npm start```
+Run: ```npm start```
 
 This will start the server
 
 ## 6. Start Client
 Open another terminal (keeping the previous one open) and navigate into the client directory
 
-Paste: ```npm start```
+Run: ```npm start```
 
 This will start the client and open your default browser pointing to the hosted client
