@@ -134,9 +134,26 @@ class Connection {
       return new Promise((resolve, reject) => {
         // PERFORM Query
         this.connection.query(sql, (err, res) => {
-          if(err) reject(err);
+          if (err) reject(err);
           else resolve(res);
-        })
+        });
+      });
+    };
+
+    // METHOD: deletes a post based on the post_id
+    this.DeletePostByPostID = (postID) => {
+      // SETUP database query
+      const query = "DELETE FROM post WHERE post_id=?";
+      const inserts = [postID];
+      const sql = mysql.format(query, inserts);
+
+      // RETURN results
+      return new Promise((resolve, reject) => {
+        // PERFORM Query
+        this.connection.query(sql, (err, res) => {
+          if (err) reject(err);
+          else resolve(res);
+        });
       });
     };
   }
