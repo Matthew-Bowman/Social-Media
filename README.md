@@ -11,6 +11,10 @@ A CRUD Application built with using the MERN Stack.
 
 # Getting Started
 ---
+## 0. Prerequisites
+NodeJS
+MySQL
+
 ## 1. Clone Repository
 Open your Terminal
 
