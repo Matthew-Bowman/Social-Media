@@ -35,7 +35,7 @@ const Profile = () => {
         <div className="row mt-5 mx-5 gy-3 d-flex flex-column align-items-center text-center">
           <h1>{data.username}'s Posts</h1>
           {data.posts.map((item, index) => {
-            return <Post content={item.content} timestamp={item.timestamp} />;
+            return <Post content={item.content} timestamp={item.timestamp} key={index} />;
           })}
         </div>
       ) : (
