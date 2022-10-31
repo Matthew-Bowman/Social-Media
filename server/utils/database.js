@@ -99,7 +99,29 @@ class Connection {
     // METHOD: Compares two passwords
     this.AuthorizeUser = (password, hashedPassword) => {
       return bcrypt.compareSync(password, hashedPassword);
-    }
+    };
+
+    // METHOD: Create a post
+    this.CreatePost = (userID, content) => {
+      // INITIALISE variables
+      const date = new Date(Date.now());
+      const formattedDate = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()} ${date.getUTCHours()}:${date.getUTCMinutes()}`;
+
+      // SETUP database query
+      const query =
+        "INSERT INTO post (user_id, content, timestamp) VALUES (?, ?, ?)";
+      const inserts = [userID, content, formattedDate];
+      const sql = mysql.format(query, inserts);
+
+      // RETURN results
+      return new Promise((resolve, reject) => {
+        // PERFORM Query
+        this.connection.query(sql, (err, res) => {
+          if (err) reject(err);
+          else resolve(res);
+        });
+      });
+    };
   }
 }
 
