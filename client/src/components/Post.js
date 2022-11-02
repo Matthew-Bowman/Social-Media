@@ -39,7 +39,7 @@ function Post({ originalContent, timestamp, id, alterable = false }) {
     <div className="card text-start col-12 col-md-8 col-lg-6 col-xl-5 shadow">
       <div className="card-body">
         <p className="m-0 mb-3">{content}</p>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between align-items-center">
           <p className="m-0 blockquote-footer">{timestamp}</p>
           {alterable && (
             <div className="d-flex gap-3">
