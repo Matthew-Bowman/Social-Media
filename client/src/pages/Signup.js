@@ -23,7 +23,7 @@ function Signup() {
       document.querySelector(`#submit-button`).classList.add("disabled");
 
       axios
-        .post(`http://localhost:3001/api/users/create`, {
+        .post(`/api/users/create`, {
           username: state.username,
           password: state.password,
         })

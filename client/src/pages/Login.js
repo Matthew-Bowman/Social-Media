@@ -26,7 +26,7 @@ function Login() {
       document.querySelector(`#submit-button`).classList.add("disabled");
 
       axios
-        .post(`http://localhost:3001/api/users/authorize`, {
+        .post(`/api/users/authorize`, {
           username: state.username,
           password: state.password,
         })

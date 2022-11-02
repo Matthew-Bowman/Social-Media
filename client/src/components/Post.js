@@ -8,7 +8,7 @@ function Post({ originalContent, timestamp, id, alterable = false }) {
   const handleDelete = async (e) => {
     try {
       const response = await axios.delete(
-        "http://localhost:3001/api/me/posts",
+        "/api/me/posts",
         { data: { post_id: id } }
       );
       if (response.status === 200)
@@ -20,7 +20,7 @@ function Post({ originalContent, timestamp, id, alterable = false }) {
 
   const handleEdit = async (e, updatedContent) => {
     try {
-      const response = await axios.put("http://localhost:3001/api/me/posts", {
+      const response = await axios.put("/api/me/posts", {
         post_id: id,
         content: updatedContent,
       });

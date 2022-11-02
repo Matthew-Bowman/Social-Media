@@ -14,7 +14,7 @@ const Profile = () => {
   const loadData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/posts?username=${params.username}`
+        `/api/posts?username=${params.username}`
       );
       setData(response.data.body);
       setCode(response.data.code);

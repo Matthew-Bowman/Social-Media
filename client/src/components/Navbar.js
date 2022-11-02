@@ -14,7 +14,7 @@ function Navbar() {
   });
 
   const sendLogout = async () => {
-    const res = await axios.post("http://localhost:3001/api/me/logout", null, {
+    const res = await axios.post("/api/me/logout", null, {
       withCredentials: true,
     });
 

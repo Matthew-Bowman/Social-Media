@@ -11,7 +11,7 @@ function CreatePost() {
 
     try {
       const response = await axios.post(
-        `http://localhost:3001/api/me/posts`,
+        `/api/me/posts`,
         { content: content },
         {
           withCredentials: true,

@@ -11,7 +11,7 @@ function Home() {
   const loadPosts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/api/me/posts`,
+        `/api/me/posts`,
         null,
         { withCredentials: true }
       );
@@ -23,7 +23,7 @@ function Home() {
 
   const loadUsername = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/me`, null, {
+      const response = await axios.get(`/api/me`, null, {
         withCredentials: true,
       });
       setUsername(response.data.body.user.username);
