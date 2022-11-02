@@ -32,6 +32,7 @@ function Post({ originalContent, timestamp, id, alterable = false }) {
 
   useEffect(() => {
     setContent(originalContent);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

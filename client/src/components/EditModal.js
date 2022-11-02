@@ -9,6 +9,7 @@ function EditModal({ id, existingContent, handleEdit }) {
 
   useEffect(() => {
     setContent(existingContent);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
