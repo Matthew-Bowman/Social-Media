@@ -1,7 +1,7 @@
 import Alert from "../components/Alert";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 let state = {
   username: "",
@@ -67,8 +67,9 @@ function Signup() {
   return (
     <div>
       <div className="container py-5 mt-5">
+        <h1 className="mx-auto text-center">Sign Up</h1>
         <form
-          className="col-lg-4 mx-auto bg-light shadow p-5 rounded border"
+          className="col-lg-4 mx-auto my-3 bg-light shadow p-5 rounded border"
           onSubmit={handleSubmit}
         >
           {error ? <Alert text={state.errorText} /> : null}
@@ -101,6 +102,12 @@ function Signup() {
             Create Account
           </button>
         </form>
+        <h3 className="text-center">Already have an account?</h3>
+        <div className="text-center">
+          <Link to="/login" className="btn btn-outline-dark mt-1">
+            <span>Login</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
