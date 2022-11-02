@@ -17,8 +17,7 @@ function CreatePost() {
           withCredentials: true,
         }
       );
-
-      navigate("/")
+      if (response.status) navigate("/");
     } catch (err) {
       // HANDLE Error
     }
