@@ -43,16 +43,25 @@ function Navbar() {
 
   return (
     <div>
-      <nav className="navbar bg-dark navbar-dark py-2">
+      <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
         <div className="container-fluid">
-          <div className="col-4">
-            <Link className="navbar-brand mb-0 fw-bold fs-3" to="/">
-              <span>Social</span>
-            </Link>
-          </div>
-          <div className="col-4 d-flex justify-content-center">
+          <Link className="navbar-brand mb-0 fw-bold fs-3" to="/">
+            <span>Social</span>
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbar"
+            aria-controls="navbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbar">
             <form
-              className="d-flex gap-2 mx-auto"
+              className="d-flex gap-2 my-2 my-lg-0 mx-auto"
               role="search"
               onSubmit={handleSearch}
             >
@@ -72,8 +81,7 @@ function Navbar() {
                 Search
               </button>
             </form>
-          </div>
-          <div className="col-4 d-flex justify-content-end">
+
             <div className="dropdown">
               <button
                 className="btn btn-outline-light dropdown-toggle align-items-center d-flex gap-1"
@@ -83,7 +91,7 @@ function Navbar() {
               >
                 Account
               </button>
-              <ul className="dropdown-menu dropdown-menu-end">
+              <ul className="dropdown-menu dropdown-menu-sm-end">
                 {!isLoggedIn && (
                   <>
                     <li>
