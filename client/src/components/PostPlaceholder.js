@@ -15,11 +15,13 @@ function PostPlaceholder({ alterable = false }) {
           </p>
           {alterable && (
             <div className="d-flex gap-3 col-4">
+              {/*eslint-disable-next-line jsx-a11y/anchor-has-content, jsx-a11y/anchor-is-valid */}
               <a
-                href="#"
+                href=""
                 tabIndex="-1"
                 className="btn btn-danger disabled placeholder col-6"
               ></a>
+              {/*eslint-disable-next-line jsx-a11y/anchor-has-content, jsx-a11y/anchor-is-valid */}
               <a
                 href="#"
                 tabIndex="-1"
