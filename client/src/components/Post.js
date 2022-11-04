@@ -19,9 +19,10 @@ function Post({
   id,
   alterable = false,
   stats = false,
+  isLiked = false,
 }) {
   const [content, setContent] = useState("");
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(isLiked);
   const splitTimestamp = timestamp.split(" ");
 
   const handleDelete = async (e) => {
@@ -31,6 +32,23 @@ function Post({
       });
       if (response.status === 200)
         e.target.parentElement.parentElement.parentElement.parentElement.remove();
+    } catch (err) {
+      // HANDLE Error
+    }
+  };
+
+  const likeHandler = async (pLiked) => {
+    pLiked = !pLiked;
+    try {
+      if (pLiked) {
+        const response = await axios.post("/api/me/liked", {
+          post_id: id,
+        });
+      } else {
+        const response = await axios.delete("/api/me/liked", {
+          data: { post_id: id },
+        });
+      }
     } catch (err) {
       // HANDLE Error
     }
@@ -62,15 +80,21 @@ function Post({
             <div>
               <i
                 className="bi bi-heart position-absolute"
-                onClick={() => setLiked(!liked)}
+                onClick={() => {
+                  likeHandler(liked);
+                  setLiked(!liked);
+                }}
               />
               <motion.i
                 className="bi bi-heart-fill position-absolute text-danger"
                 animate={liked ? "true" : "false"}
                 variants={filledVariants}
-                initial="false"
+                initial={liked}
                 transition={spring}
-                onClick={() => setLiked(!liked)}
+                onClick={() => {
+                  likeHandler(liked);
+                  setLiked(!liked);
+                }}
               />
             </div>
             <i className="bi bi-chat-left-dots ms-3" />
