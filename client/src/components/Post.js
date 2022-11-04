@@ -75,7 +75,7 @@ function Post({
     <div className="card text-start col-12 col-md-8 col-lg-6 col-xl-5 shadow">
       <div className="card-body">
         <p className="m-0 mb-3">{content}</p>
-        {className && (
+        {controls && (
           <div className="d-flex flex-row gap-3 fs-5 mb-1">
             <div style={{ height: "30px", width: "20px" }}>
               <i
