@@ -72,7 +72,6 @@ class Connection {
         this.connection.query(sql, (err, res) => {
           if (err) reject(err);
           else {
-            res.map((post) => console.log(post.post_id));
             const promises = res.map((post) =>
               this.IsPostLiked(post.post_id, requsetingUserID).then(
                 (liked) => (post.liked = liked)
