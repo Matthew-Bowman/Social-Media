@@ -173,6 +173,23 @@ class Connection {
         });
       });
     };
+
+    // METHOD: checks if a user has liked a post
+    this.IsPostLiked = (postID, userID) => {
+      // SETUP database query
+      const query = "SELECT * FROM liked_post WHERE post_id=? AND user_id=?";
+      const inserts = [postID, userID];
+      const sql = mysql.format(query, inserts);
+
+      // RETURN results
+      return new Promise((resolve, reject) => {
+        // PERFORM Query
+        this.connection.query(sql, (err, res) => {
+          if(err) reject(err);
+          else resolve(!(res.length<=0))
+        })
+      })
+    }
   }
 }
 
