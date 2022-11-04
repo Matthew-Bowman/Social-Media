@@ -2,7 +2,7 @@ function PostPlaceholder({ alterable = false }) {
   return (
     <div className="card text-start col-12 col-md-8 col-lg-6 col-xl-5 shadow">
       <div className="card-body">
-        <p class="card-text placeholder-wave">
+        <p className="card-text placeholder-wave">
           <span className="placeholder me-1 col-7"></span>
           <span className="placeholder me-1 col-4"></span>
           <span className="placeholder me-1 col-4"></span>
@@ -10,7 +10,7 @@ function PostPlaceholder({ alterable = false }) {
           <span className="placeholder me-1 col-8"></span>
         </p>
         <div className="d-flex justify-content-between">
-          <p class="placeholder-glow col-3">
+          <p className="placeholder-glow col-3">
             <span className="placeholder me-1 col-12"></span>
           </p>
           {alterable && (
