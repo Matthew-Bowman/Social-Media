@@ -23,6 +23,7 @@ class Connection {
       port: this.port,
     });
   }
+
   // PUBLIC METHODS
 
   // METHOD: Get user from user table matching usernames
@@ -169,6 +170,23 @@ class Connection {
     // SETUP database query
     const query = "UPDATE post SET content=? WHERE post_id=?";
     const inserts = [content, postID];
+    const sql = mysql.format(query, inserts);
+
+    // RETURN results
+    return new Promise((resolve, reject) => {
+      // PERFORM Query
+      this.connection.query(sql, (err, res) => {
+        if (err) reject(err);
+        else resolve(res);
+      });
+    });
+  };
+
+  // METHOD: removes the likes connected to a post
+  RemoveLikesByPostID = (postID) => {
+    // SETUP database query
+    const query = "DELETE FROM liked_post WHERE post_id=?";
+    const inserts = [postID];
     const sql = mysql.format(query, inserts);
 
     // RETURN results
