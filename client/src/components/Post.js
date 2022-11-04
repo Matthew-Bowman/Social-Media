@@ -1,16 +1,34 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import EditModal from "./EditModal";
+import { motion } from "framer-motion";
 
-function Post({ originalContent, timestamp, id, alterable = false }) {
+const filledVariants = {
+  true: { scale: 1 },
+  false: { scale: 0 },
+};
+
+const spring = {
+  type: "bounce",
+  duration: 0.2,
+};
+
+function Post({
+  originalContent,
+  timestamp,
+  id,
+  alterable = false,
+  stats = false,
+}) {
   const [content, setContent] = useState("");
+  const [liked, setLiked] = useState(false);
+  const splitTimestamp = timestamp.split(" ");
 
   const handleDelete = async (e) => {
     try {
-      const response = await axios.delete(
-        "/api/me/posts",
-        { data: { post_id: id } }
-      );
+      const response = await axios.delete("/api/me/posts", {
+        data: { post_id: id },
+      });
       if (response.status === 200)
         e.target.parentElement.parentElement.parentElement.parentElement.remove();
     } catch (err) {
@@ -39,8 +57,30 @@ function Post({ originalContent, timestamp, id, alterable = false }) {
     <div className="card text-start col-12 col-md-8 col-lg-6 col-xl-5 shadow">
       <div className="card-body">
         <p className="m-0 mb-3">{content}</p>
+        {stats && (
+          <div className="d-flex gap-3 fs-5 mb-1">
+            <div>
+              <i
+                className="bi bi-heart position-absolute"
+                onClick={() => setLiked(!liked)}
+              />
+              <motion.i
+                className="bi bi-heart-fill position-absolute text-danger"
+                animate={liked ? "true" : "false"}
+                variants={filledVariants}
+                initial="false"
+                transition={spring}
+                onClick={() => setLiked(!liked)}
+              />
+            </div>
+            <i className="bi bi-chat-left-dots ms-3" />
+          </div>
+        )}
         <div className="d-flex justify-content-between align-items-center">
-          <p className="m-0 blockquote-footer">{timestamp}</p>
+          <p className="m-0 blockquote-footer">
+            {splitTimestamp[0]}
+            <span className="d-none d-sm-inline"> {splitTimestamp[1]}</span>
+          </p>
           {alterable && (
             <div className="d-flex gap-3">
               <button
@@ -48,14 +88,14 @@ function Post({ originalContent, timestamp, id, alterable = false }) {
                 onClick={handleDelete}
                 id={id}
               >
-                Delete
+                <i className="bi bi-trash" />
               </button>
               <button
-                className="btn btn-outline-primary px-3"
+                className="btn btn-outline-primary d-flex align-items-center justify-content-center"
                 data-bs-toggle="modal"
                 data-bs-target={`#edit-modal-${id}`}
               >
-                Edit
+                <i className="bi bi-pencil" />
               </button>
               <EditModal
                 id={id}
