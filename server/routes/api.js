@@ -10,7 +10,11 @@ const authenticate = require("../utils/authenticate");
 const database = new Connection();
 
 // REGISTER Route
-router.get(`/posts`, (req, res, next) => {
+router.get(`/posts`, authenticate, (req, res, next) => {
+  // Get Requesting User
+  const token = req.cookies.auth_token;
+  const tokenUser = jwt.verify(token, process.env.JWT_SECRET);
+
   // CHECK for username in querystring
   if (!req.query.username) {
     res.status(404);
@@ -33,8 +37,9 @@ router.get(`/posts`, (req, res, next) => {
 
           // GET user Posts and respond to request
           database
-            .GetPostsByUserID(user.user_id)
+            .GetPostsByUserID(user.user_id, tokenUser.id)
             .then((postsResult) => {
+              console.log(postsResult);
               res.status(200);
               res.json({
                 code: 200,
