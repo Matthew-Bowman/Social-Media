@@ -76,8 +76,8 @@ function Post({
       <div className="card-body">
         <p className="m-0 mb-3">{content}</p>
         {stats && (
-          <div className="d-flex gap-3 fs-5 mb-1">
-            <div>
+          <div className="d-flex flex-row gap-3 fs-5 mb-1">
+            <div style={{ height: "30px", width: "20px" }}>
               <i
                 className="bi bi-heart position-absolute"
                 onClick={() => {
@@ -97,7 +97,7 @@ function Post({
                 }}
               />
             </div>
-            <i className="bi bi-chat-left-dots ms-3" />
+            <i className="bi bi-chat-left-dots" />
           </div>
         )}
         <div className="d-flex justify-content-between align-items-center">
