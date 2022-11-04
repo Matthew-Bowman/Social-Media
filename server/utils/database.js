@@ -60,7 +60,7 @@ class Connection {
     };
 
     // METHOD: Get posts related to a user
-    this.GetPostsByUserID = (userID) => {
+    this.GetPostsByUserID = (userID, requsetingUserID) => {
       // SETUP database query
       const query = `SELECT * FROM post WHERE user_id=? ORDER BY post_id DESC`;
       const inserts = [userID];
@@ -71,7 +71,15 @@ class Connection {
         // PERFORM Query
         this.connection.query(sql, (err, res) => {
           if (err) reject(err);
-          else resolve(res);
+          else {
+            res.map((post) => console.log(post.post_id));
+            const promises = res.map((post) =>
+              this.IsPostLiked(post.post_id, requsetingUserID).then(
+                (liked) => (post.liked = liked)
+              )
+            );
+            Promise.all(promises).then(() => resolve(res));
+          }
         });
       });
     };
