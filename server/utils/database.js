@@ -185,11 +185,28 @@ class Connection {
       return new Promise((resolve, reject) => {
         // PERFORM Query
         this.connection.query(sql, (err, res) => {
-          if(err) reject(err);
-          else resolve(!(res.length<=0))
-        })
-      })
-    }
+          if (err) reject(err);
+          else resolve(!(res.length <= 0));
+        });
+      });
+    };
+
+    // METHOD: adds a liked post
+    this.LikePost = (postID, userID) => {
+      // SETUP database query
+      const query = "INSERT INTO liked_post (post_id, user_id) VALUES (?, ?)";
+      const inserts = [postID, userID];
+      const sql = mysql.format(query, inserts);
+
+      // RETURN results
+      return new Promise((resolve, reject) => {
+        // PERFORM Query
+        this.connection.query(sql, (err, res) => {
+          if (err) reject(err);
+          else resolve(res);
+        });
+      });
+    };
   }
 }
 
