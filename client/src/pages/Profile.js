@@ -49,6 +49,7 @@ const Profile = () => {
                     key={index}
                     id={item.post_id}
                     stats={true}
+                    isLiked={item.liked}
                   />
                 );
               })}
