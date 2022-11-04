@@ -48,6 +48,7 @@ const Profile = () => {
                     timestamp={item.timestamp}
                     key={index}
                     id={item.post_id}
+                    stats={true}
                   />
                 );
               })}
