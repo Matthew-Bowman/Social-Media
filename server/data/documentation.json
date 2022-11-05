@@ -102,11 +102,6 @@
               "Name": "password",
               "Type": "Body",
               "Value": "string"
-            },
-            {
-              "Name": "auth_token",
-              "Type": "Cookie",
-              "Value": "string"
             }
           ],
           "Successful Response": [
