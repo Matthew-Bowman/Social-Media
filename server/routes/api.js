@@ -39,7 +39,6 @@ router.get(`/posts`, authenticate, (req, res, next) => {
           database
             .GetPostsByUserID(user.user_id, tokenUser.id)
             .then((postsResult) => {
-              console.log(postsResult);
               res.status(200);
               res.json({
                 code: 200,
@@ -225,13 +224,23 @@ router.delete("/me/posts", authenticate, (req, res) => {
           res.status(403);
           res.json({ code: 403, message: "Forbidden" });
         } else {
+          // REMOVE Likes from Post
           database
-            .DeletePostByPostID(post_id)
-            .then((result) => {
-              res.status(200);
-              res.json({ code: 200, message: "Success" });
+            .RemoveLikesByPostID(post_id)
+            .then(() => {
+              // REMOVE Post
+              database
+                .DeletePostByPostID(post_id)
+                .then(() => {
+                  res.status(200);
+                  res.json({ code: 200, message: "Success" });
+                })
+                .catch(() => {
+                  res.status(500);
+                  res.json({ code: 500, message: "Internal Server Error" });
+                });
             })
-            .catch((err) => {
+            .catch(() => {
               res.status(500);
               res.json({ code: 500, message: "Internal Server Error" });
             });
@@ -279,6 +288,104 @@ router.put(`/me/posts`, authenticate, (req, res) => {
       res.status(500);
       res.json({ code: 500, message: "Internal Server Error" });
     });
+});
+
+// ADD VALIDATOIN
+router.post(`/me/liked`, authenticate, (req, res) => {
+  // GET User
+  const token = req.cookies.auth_token;
+  const user = jwt.verify(token, process.env.JWT_SECRET);
+
+  // PRESENCE CHECK for post_id param
+  if (!req.body.post_id) {
+    res.status(422);
+    res.json({ code: 422, message: "Unprocessable Entity" });
+  } else {
+    const post_id = req.body.post_id;
+
+    // PRESENCE CHECK for Post
+    database
+      .GetPostByPostID(post_id)
+      .then((post) => {
+        if (post.length <= 0) {
+          res.status(404);
+          res.json({ code: 404, message: "Not Found" });
+        } else {
+          // CHECK if post liked
+          database.IsPostLiked(post_id, user.id).then((isLiked) => {
+            if (isLiked) {
+              res.status(400);
+              res.json({ code: 400, message: "Bad Request" });
+            } else {
+              // LIKE Post
+              database
+                .LikePost(post_id, user.id)
+                .then((result) => {
+                  res.status(201);
+                  res.json({ code: 201, message: "Created" });
+                })
+                .catch((err) => {
+                  res.status(500);
+                  res.json({ code: 500, message: "Internal Server Error" });
+                });
+            }
+          });
+        }
+      })
+      .catch(() => {
+        res.status(500);
+        res.json({ code: 500, message: "Internal Server Error" });
+      });
+  }
+});
+
+// ADD VALIDATION
+router.delete(`/me/liked`, authenticate, (req, res) => {
+  // GET User
+  const token = req.cookies.auth_token;
+  const user = jwt.verify(token, process.env.JWT_SECRET);
+
+  // PRESENCE CHECK for post_id param
+  if (!req.body.post_id) {
+    res.status(422);
+    res.json({ code: 422, message: "Unprocessable Entity" });
+  } else {
+    const post_id = req.body.post_id;
+
+    // PRESENCE CHECK for Post
+    database
+      .GetPostByPostID(post_id)
+      .then((post) => {
+        if (post.length <= 0) {
+          res.status(404);
+          res.json({ code: 404, message: "Not Found" });
+        } else {
+          // CHECK if post liked
+          database.IsPostLiked(post_id, user.id).then((isLiked) => {
+            if (!isLiked) {
+              res.status(400);
+              res.json({ code: 400, message: "Bad Request" });
+            } else {
+              // UNLIKE Post
+              database
+                .UnlikePost(post_id, user.id)
+                .then((result) => {
+                  res.status(200);
+                  res.json({ code: 200, message: "Success" });
+                })
+                .catch((err) => {
+                  res.status(500);
+                  res.json({ code: 500, message: "Internal Server Error" });
+                });
+            }
+          });
+        }
+      })
+      .catch(() => {
+        res.status(500);
+        res.json({ code: 500, message: "Internal Server Error" });
+      });
+  }
 });
 
 // EXPORT Routes
