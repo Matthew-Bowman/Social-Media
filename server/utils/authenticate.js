@@ -5,13 +5,13 @@ const jwt = require("jsonwebtoken");
 const authenticate = (req, res, next) => {
   // CHECK for cookies
   if (!req.cookies) {
-    res.status(404);
-    res.json({ code: 404, message: "Missing Cookies" });
+    res.status(422);
+    res.json({ code: 422, message: "Unprocessable Entity" });
   } else {
     // CHECK for auth_token cookie
     if (!req.cookies["auth_token"]) {
-      res.status(404);
-      res.json({ code: 404, message: "Missing Token Cookie" });
+      res.status(422);
+      res.json({ code: 422, message: "Unprocessable Entity" });
     } else {
       // VERIFY jsonwebtoken
       const token = req.cookies["auth_token"];
