@@ -4,6 +4,7 @@ const express = require(`express`);
 const app = express();
 const cors = require("cors");
 const cookies = require("cookie-parser");
+const ejs = require("ejs");
 
 // GET routes
 const api = require(`./routes/api`);
@@ -17,6 +18,8 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookies());
+app.use("/static", express.static("public"));
+app.set("view engine", "ejs");
 
 // SETUP Routes
 app.use(`/api`, api);

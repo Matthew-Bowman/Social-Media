@@ -1,0 +1,101 @@
+{
+  "Categories": [
+    {
+      "Name": "/posts",
+      "Routes": [
+        {
+          "Method": "GET",
+          "Route": "/posts",
+          "Payload": [
+            {
+              "Name": "auth_token",
+              "Type": "Cookie",
+              "Value": "string"
+            },
+            {
+              "Name": "username",
+              "Type": "Query Parameter",
+              "Value": "string"
+            }
+          ],
+          "Successful Response": [
+            {
+              "Heading": "Response",
+              "Rows": [
+                {
+                  "Name": "code",
+                  "Datatype": "int"
+                },
+                {
+                  "Name": "message",
+                  "Datatype": "string"
+                },
+                {
+                  "Name": "body",
+                  "Datatype": "body"
+                }
+              ]
+            },
+            {
+              "Heading": "body",
+              "Rows": [
+                {
+                  "Name": "posts",
+                  "Datatype": "post[]"
+                },
+                {
+                  "Name": "username",
+                  "Datatype": "string"
+                },
+                {
+                  "Heading": "body",
+                  "Rows": [
+                    {
+                      "Name": "posts",
+                      "Datatype": "post[]"
+                    },
+                    {
+                      "Name": "username",
+                      "Datatype": "string"
+                    }
+                  ]
+                },
+                {
+                  "Heading": "post",
+                  "Rows": [
+                    {
+                      "Name": "post_id",
+                      "Datatype": "int"
+                    },
+                    {
+                      "Name": "user_id",
+                      "Datatype": "int"
+                    },
+                    {
+                      "Name": "content",
+                      "Datatype": "string"
+                    },
+                    {
+                      "Name": "timestamp",
+                      "Datatype": "string"
+                    },
+                    {
+                      "Name": "liked",
+                      "Datatype": "bool"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Error Responses": [
+            { "Code": "401", "Message": "Unauthorized" },
+            { "Code": "404", "Message": "Not Found" },
+            { "Code": "422", "Message": "Unprocessable Entity" },
+            { "Code": "500", "Message": "Internal Server Error" }
+          ]
+        }
+      ]
+    }
+  ]
+}
