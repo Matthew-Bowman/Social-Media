@@ -78,3 +78,10 @@ Open another terminal (keeping the previous one open) and navigate into the clie
 Run: ```npm start```
 
 This will start the client and open your default browser pointing to the hosted client
+
+
+# To Do
+---
+
+1. Add Error Handling for Axios requests
+2. Finish Documentation
