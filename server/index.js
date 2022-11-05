@@ -7,6 +7,7 @@ const cookies = require("cookie-parser");
 
 // GET routes
 const api = require(`./routes/api`);
+const docs = require(`./routes/documentation`);
 
 // INITIALISE Variables
 const PORT = process.env.PORT;
@@ -19,6 +20,7 @@ app.use(cookies());
 
 // SETUP Routes
 app.use(`/api`, api);
+app.use(`/docs`, docs);
 
 // START Server
 app.listen(PORT, () => console.log(`Server Started on Port: ${PORT}`));
