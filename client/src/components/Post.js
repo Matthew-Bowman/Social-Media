@@ -105,11 +105,11 @@ function Controls({ id, isLiked }) {
     pLiked = !pLiked;
     try {
       if (pLiked) {
-        const response = await axios.post("/api/me/liked", {
+        const response = await axios.post("/api/me/like", {
           post_id: id,
         });
       } else {
-        const response = await axios.delete("/api/me/liked", {
+        const response = await axios.delete("/api/me/like", {
           data: { post_id: id },
         });
       }

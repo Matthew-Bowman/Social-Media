@@ -291,7 +291,7 @@ router.put(`/me/posts`, authenticate, (req, res) => {
 });
 
 // ADD VALIDATOIN
-router.post(`/me/liked`, authenticate, (req, res) => {
+router.post(`/me/like`, authenticate, (req, res) => {
   // GET User
   const token = req.cookies.auth_token;
   const user = jwt.verify(token, process.env.JWT_SECRET);
@@ -340,7 +340,7 @@ router.post(`/me/liked`, authenticate, (req, res) => {
 });
 
 // ADD VALIDATION
-router.delete(`/me/liked`, authenticate, (req, res) => {
+router.delete(`/me/like`, authenticate, (req, res) => {
   // GET User
   const token = req.cookies.auth_token;
   const user = jwt.verify(token, process.env.JWT_SECRET);
