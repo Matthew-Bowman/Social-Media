@@ -2,11 +2,10 @@
 require(`dotenv`).config();
 const express = require(`express`);
 const router = express.Router();
-
-const htmlFile = require("../templates/documentation.html");
+const path = require("path");
 
 router.get("/", (req, res) => {
-    
+    res.sendFile(path.join(__dirname, "../templates/documentation.html"))
 });
 
 // EXPORT Routes
