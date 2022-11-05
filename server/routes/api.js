@@ -17,8 +17,8 @@ router.get(`/posts`, authenticate, (req, res, next) => {
 
   // CHECK for username in querystring
   if (!req.query.username) {
-    res.status(404);
-    res.json({ code: 404, message: "No Username Provided" });
+    res.status(422);
+    res.json({ code: 422, message: "Unprocessable Entity" });
   } else {
     // INITIALISE username variable
     let username = req.query.username;
