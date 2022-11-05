@@ -3,8 +3,10 @@ require(`dotenv`).config();
 const express = require(`express`);
 const router = express.Router();
 
+const htmlFile = require("../templates/documentation.html");
+
 router.get("/", (req, res) => {
-  res.json({ code: 200, message: "Success" });
+    
 });
 
 // EXPORT Routes

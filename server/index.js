@@ -17,7 +17,6 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookies());
-app.use("/static", express.static("public"))
 
 // SETUP Routes
 app.use(`/api`, api);
