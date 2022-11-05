@@ -100,8 +100,8 @@ router.post(`/users/create`, (req, res) => {
 
 router.post("/users/authorize", (req, res) => {
   if (!req.body.username || !req.body.password) {
-    res.status(404);
-    res.json({ code: 404, message: "Username/Password not Provided" });
+    res.status(422);
+    res.json({ code: 422, message: "Unprocessable Entity" });
   } else {
     const username = req.body.username;
     const password = req.body.password;
