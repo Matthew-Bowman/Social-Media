@@ -19,11 +19,137 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body>
-
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid"><a href="/docs" class="navbar-brand">API</a></div>
+  <body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-dark bg-dark border-secondary">
+      <div class="container-fluid">
+        <a href="/docs" class="navbar-brand">Navbar Template</a>
+      </div>
     </nav>
 
+    <!-- <header class="container-fluid bg-light mx-auto p-5 text-center">
+      <div class="py-5">
+        <h1 class="display-1">API Documentation</h1>
+        <a href="#main" class="btn btn-outline-dark mt-2">Get Started</a>
+      </div>
+    </header> -->
+
+    <main id="main" class="container mx-auto my-5 text-start">
+      <div class="py-5">
+        <h1 class="mb-4">Endpoints</h1>
+        <!-- SECTION CONTAINER -->
+        <section class="ps-4 mb-4">
+          <h2>/posts</h2>
+          <!-- ENDPOINT CONTAINER -->
+          <article class="ps-4">
+            <!-- GET /posts -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-success">GET</span> /posts
+                </h3>
+              </div>
+            </div>
+          </article>
+        </section>
+        <!-- SECTION CONTAINER -->
+        <section class="ps-4 mb-4">
+          <h2>/users</h2>
+          <!-- ENDPOINT CONTAINER -->
+          <article class="ps-4">
+            <!-- POST /users/create -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-warning">POST</span> /users/create
+                </h3>
+              </div>
+            </div>
+            <!-- POST /users/authorize -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-warning">POST</span> /users/authorize
+                </h3>
+              </div>
+            </div>
+          </article>
+        </section>
+        <!-- SECTION CONTAINER -->
+        <section class="ps-4 mb-4">
+          <h2>/me</h2>
+          <!-- ENDPOINT CONTAINER -->
+          <article class="ps-4">
+            <!-- POST /users/create -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-warning">POST</span> /me/
+                </h3>
+              </div>
+            </div>
+            <!-- POST /users/logout -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-warning">POST</span> /me/logout
+                </h3>
+              </div>
+            </div>
+            <!-- GET /users/posts -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-success">GET</span> /me/posts
+                </h3>
+              </div>
+            </div>
+            <!-- POST /users/posts -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-warning">POST</span> /me/posts
+                </h3>
+              </div>
+            </div>
+            <!-- DELETE /users/posts -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-danger">DELETE</span> /me/posts
+                </h3>
+              </div>
+            </div>
+            <!-- PUT /users/posts -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-primary">PUT</span> /me/posts
+                </h3>
+              </div>
+            </div>
+            <!-- POST /me/like -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-warning">POST</span> /me/like
+                </h3>
+              </div>
+            </div>
+            <!-- POST /me/like -->
+            <div class="card shadow mt-4">
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="text-danger">DELETE</span> /me/like
+                </h3>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    <footer class="bg-dark mt-auto py-3">
+      <h3 class="text-light text-center my-auto">Footer Template</h3>
+    </footer>
   </body>
 </html>
