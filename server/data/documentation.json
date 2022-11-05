@@ -6,6 +6,7 @@
         {
           "Method": "GET",
           "Route": "/posts",
+          "Identifier": "posts-get-posts",
           "Payload": [
             {
               "Name": "auth_token",
@@ -46,44 +47,31 @@
                 {
                   "Name": "username",
                   "Datatype": "string"
+                }
+              ]
+            },
+            {
+              "Heading": "post",
+              "Rows": [
+                {
+                  "Name": "post_id",
+                  "Datatype": "int"
                 },
                 {
-                  "Heading": "body",
-                  "Rows": [
-                    {
-                      "Name": "posts",
-                      "Datatype": "post[]"
-                    },
-                    {
-                      "Name": "username",
-                      "Datatype": "string"
-                    }
-                  ]
+                  "Name": "user_id",
+                  "Datatype": "int"
                 },
                 {
-                  "Heading": "post",
-                  "Rows": [
-                    {
-                      "Name": "post_id",
-                      "Datatype": "int"
-                    },
-                    {
-                      "Name": "user_id",
-                      "Datatype": "int"
-                    },
-                    {
-                      "Name": "content",
-                      "Datatype": "string"
-                    },
-                    {
-                      "Name": "timestamp",
-                      "Datatype": "string"
-                    },
-                    {
-                      "Name": "liked",
-                      "Datatype": "bool"
-                    }
-                  ]
+                  "Name": "content",
+                  "Datatype": "string"
+                },
+                {
+                  "Name": "timestamp",
+                  "Datatype": "string"
+                },
+                {
+                  "Name": "liked",
+                  "Datatype": "bool"
                 }
               ]
             }
@@ -96,6 +84,8 @@
           ]
         }
       ]
-    }
+    },
+    { "Name": "/users", "Routes": [] },
+    { "Name": "/me", "Routes": [] }
   ]
 }

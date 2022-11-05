@@ -2,10 +2,13 @@
 require(`dotenv`).config();
 const express = require(`express`);
 const router = express.Router();
-const path = require("path");
+const fs = require("fs");
+
+// GET Docs Data
+const data = JSON.parse(fs.readFileSync("./data/documentation.json"));
 
 router.get("/", (req, res) => {
-  res.render("documentation");
+  res.render("documentation", data);
 });
 
 // EXPORT Routes

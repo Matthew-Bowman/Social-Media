@@ -38,24 +38,27 @@
         <h1 class="mb-4">Endpoints</h1>
         <!-- SECTION CONTAINER -->
         <section class="ps-sm-4 mb-4">
-          <h2>/posts</h2>
-          <!-- ENDPOINT CONTAINER -->
-          <article class="ps-sm-4">
-            <!-- GET /posts -->
+          <% Categories.forEach(cat => {%>
+          <h2><%= cat.Name %></h2>
+
+          <article class="ps-sm-4 mb-3">
+            <% cat.Routes.forEach(route => { %>
             <div class="card shadow mt-4">
               <div
                 class="card-header p-0 border-0"
                 data-bs-toggle="collapse"
-                data-bs-target="#posts-body"
+                data-bs-target="#<%= route.Identifier %>"
               >
                 <div class="input-group m-0">
-                  <span class="input-group-text bg-dark text-white">GET</span>
-                  <p class="form-control m-0">/posts</p>
+                  <span class="input-group-text bg-dark text-white"
+                    ><%= route.Method %></span
+                  >
+                  <p class="form-control m-0"><%= route.Route %></p>
                 </div>
               </div>
-              <div class="collapse card-body p-0" id="posts-body">
+              <div class="collapse card-body p-0" id="<%= route.Identifier %>">
                 <div class="p-3 d-flex flex-column gap-5">
-                  <!-- PAYLOAD SECTION -->
+                  <!-- PAYLOAD -->
                   <section>
                     <h4>Payload</h4>
                     <table class="table table-light border rounded table-hover">
@@ -67,22 +70,21 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <% route.Payload.forEach(item => { %>
                         <tr>
-                          <td>auth_token</td>
-                          <td>cookie</td>
-                          <td>string</td>
+                          <td><%= item.Name %></td>
+                          <td><%= item.Type %></td>
+                          <td><%= item.Value %></td>
                         </tr>
-                        <tr>
-                          <td>username</td>
-                          <td>query parameter</td>
-                          <td>string</td>
-                        </tr>
+                        <%})%>
                       </tbody>
                     </table>
                   </section>
+                  <!-- SUCCESSFUL RESPONSE -->
                   <section>
                     <h4>Successful Response</h4>
-                    <h5 class="fs-bold">Response</h5>
+                    <% route["Successful Response"].forEach(response => { %>
+                    <h5 class="fs-bold"><%= response.Heading %></h5>
                     <table class="table table-light border rounded table-hover">
                       <thead>
                         <tr>
@@ -91,71 +93,17 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <% response.Rows.forEach(row => { %>
                         <tr>
-                          <td>code</td>
-                          <td>int</td>
+                          <td><%= row.Name %></td>
+                          <td><%= row.Datatype %></td>
                         </tr>
-                        <tr>
-                          <td>message</td>
-                          <td>string</td>
-                        </tr>
-                        <tr>
-                          <td>body</td>
-                          <td>body</td>
-                        </tr>
+                        <%})%>
                       </tbody>
                     </table>
-                    <h5 class="fs-bold">body</h5>
-                    <table class="table table-light border rounded table-hover">
-                      <thead>
-                        <tr>
-                          <th scope="col">Name</th>
-                          <th scope="col">Data Type</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>posts</td>
-                          <td>post[]</td>
-                        </tr>
-                        <tr>
-                          <td>username</td>
-                          <td>string</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <h5 class="fs-bold">post</h5>
-                    <table class="table table-light border rounded table-hover">
-                      <thead>
-                        <tr>
-                          <th scope="col">Name</th>
-                          <th scope="col">Data Type</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>post_id</td>
-                          <td>int</td>
-                        </tr>
-                        <tr>
-                          <td>user_id</td>
-                          <td>int</td>
-                        </tr>
-                        <tr>
-                          <td>content</td>
-                          <td>string</td>
-                        </tr>
-                        <tr>
-                          <td>timestamp</td>
-                          <td>string</td>
-                        </tr>
-                        <tr>
-                          <td>liked</td>
-                          <td>bool</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <%})%>
                   </section>
+                  <!-- ERROR RERSPONSES -->
                   <section>
                     <h4>Error Responses</h4>
                     <table class="table table-light border rounded table-hover">
@@ -166,29 +114,21 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <%route["Error Responses"].forEach(error => {%>
                         <tr>
-                          <td>401</td>
-                          <td>Unauthorized</td>
+                          <td><%= error.Code %></td>
+                          <td><%= error.Message %></td>
                         </tr>
-                        <tr>
-                          <td>404</td>
-                          <td>Not Found</td>
-                        </tr>
-                        <tr>
-                          <td>422</td>
-                          <td>Unprocessable Entity</td>
-                        </tr>
-                        <tr>
-                          <td>500</td>
-                          <td>Internal Server Error</td>
-                        </tr>
+                        <%})%>
                       </tbody>
                     </table>
                   </section>
                 </div>
               </div>
             </div>
+            <%})%>
           </article>
+          <% }) %>
         </section>
       </div>
     </main>
