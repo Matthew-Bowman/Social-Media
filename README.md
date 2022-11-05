@@ -9,6 +9,13 @@ A CRUD Application built with using the MERN Stack.
 ##### N - NodeJS
 ---
 
+#Notes
+---
+Documentation can be found at
+`localhost:3001/docs` 
+
+Replace localhost:3001 with your setup
+
 # Getting Started
 ---
 ## 0. Prerequisites
