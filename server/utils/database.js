@@ -151,7 +151,7 @@ class Connection {
   // METHOD: returns posts based on the post_id
   GetPostByPostID = (postID) => {
     // SETUP database query
-    const query = "SELECT FROM post WHERE post_id=?";
+    const query = "SELECT * FROM post WHERE post_id=?";
     const inserts = [postID];
     const sql = mysql.format(query, inserts);
 
