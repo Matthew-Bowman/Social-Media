@@ -85,7 +85,55 @@
         }
       ]
     },
-    { "Name": "/users", "Routes": [] },
+    {
+      "Name": "/users",
+      "Routes": [
+        {
+          "Method": "POST",
+          "Route": "/users/create",
+          "Identifier": "post-users-users-create",
+          "Payload": [
+            {
+              "Name": "username",
+              "Type": "Body",
+              "Value": "string"
+            },
+            {
+              "Name": "password",
+              "Type": "Body",
+              "Value": "string"
+            },
+            {
+              "Name": "auth_token",
+              "Type": "Cookie",
+              "Value": "string"
+            }
+          ],
+          "Successful Response": [
+            {
+              "Heading": "Response",
+              "Rows": [
+                {
+                  "Name": "code",
+                  "Datatype": "int"
+                },
+                {
+                  "Name": "message",
+                  "Datatype": "string"
+                }
+              ]
+            }
+          ],
+          "Error Responses": [
+            { "Code": "401", "Message": "Unauthorized" },
+            { "Code": "409", "Message": "Conflict" },
+            { "Code": "413", "Message": "Payload too Large" },
+            { "Code": "422", "Message": "Unprocessable Entity" },
+            { "Code": "500", "Message": "Internal Server Error" }
+          ]
+        }
+      ]
+    },
     { "Name": "/me", "Routes": [] }
   ]
 }
