@@ -9,7 +9,7 @@ A CRUD Application built with using the MERN Stack.
 ##### N - NodeJS
 ---
 
-#Notes
+# Notes
 ---
 Documentation can be found at
 `localhost:3001/docs` 
