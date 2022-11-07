@@ -440,6 +440,45 @@
             { "Code": "422", "Message": "Unprocessable Entity" },
             { "Code": "500", "Message": "Internal Server Error" }
           ]
+        },
+        {
+          "Method": "POST",
+          "Route": "/me/like",
+          "Identifier": "me-post-me-like",
+          "Payload": [
+            {
+              "Name": "auth_token",
+              "Type": "Cookie",
+              "Value": "string"
+            },
+            {
+              "Name": "post_id",
+              "Type": "Body",
+              "Value": "int"
+            }
+          ],
+          "Successful Response": [
+            {
+              "Heading": "response",
+              "Rows": [
+                {
+                  "Name": "code",
+                  "Datatype": "int"
+                },
+                {
+                  "Name": "message",
+                  "Datatype": "string"
+                }
+              ]
+            }
+          ],
+          "Error Responses": [
+            { "Code": "400", "Message": "Bad Request" },
+            { "Code": "401", "Message": "Unauthorized" },
+            { "Code": "404", "Message": "Not Found" },
+            { "Code": "422", "Message": "Unprocessable Entity" },
+            { "Code": "500", "Message": "Internal Server Error" }
+          ]
         }
       ]
     }
