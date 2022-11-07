@@ -396,6 +396,50 @@
             { "Code": "422", "Message": "Unprocessable Entity" },
             { "Code": "500", "Message": "Internal Server Error" }
           ]
+        },
+        {
+          "Method": "PUT",
+          "Route": "/me/posts",
+          "Identifier": "me-put-me-posts",
+          "Payload": [
+            {
+              "Name": "auth_token",
+              "Type": "Cookie",
+              "Value": "string"
+            },
+            {
+              "Name": "post_id",
+              "Type": "Body",
+              "Value": "int"
+            },
+            {
+              "Name": "content",
+              "Type": "Body",
+              "Value": "int"
+            }
+          ],
+          "Successful Response": [
+            {
+              "Heading": "response",
+              "Rows": [
+                {
+                  "Name": "code",
+                  "Datatype": "int"
+                },
+                {
+                  "Name": "message",
+                  "Datatype": "string"
+                }
+              ]
+            }
+          ],
+          "Error Responses": [
+            { "Code": "401", "Message": "Unauthorized" },
+            { "Code": "403", "Message": "Forbidden" },
+            { "Code": "404", "Message": "Not Found" },
+            { "Code": "422", "Message": "Unprocessable Entity" },
+            { "Code": "500", "Message": "Internal Server Error" }
+          ]
         }
       ]
     }
