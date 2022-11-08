@@ -27,7 +27,6 @@ function Signup() {
         })
         .catch((err) => {
           document.querySelector(`#submit-button`).classList.remove("disabled");
-          console.log(err);
           switch (err.response.status) {
             case 500:
               setError("Internal Server Error, Please try again");
