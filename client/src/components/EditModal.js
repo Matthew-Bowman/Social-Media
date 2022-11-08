@@ -3,10 +3,6 @@ import { useEffect, useState } from "react";
 function EditModal({ id, existingContent, handleEdit }) {
   const [content, setContent] = useState("");
 
-  const handleChange = async (e) => {
-    setContent(e.target.value);
-  };
-
   useEffect(() => {
     setContent(existingContent);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,7 +41,7 @@ function EditModal({ id, existingContent, handleEdit }) {
               className="form-control"
               type="text"
               maxLength="255"
-              onChange={handleChange}
+              onChange={(e) => setContent(e.target.value)}
               value={content}
             />
           </div>
