@@ -3,31 +3,26 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
-let state = {
-  username: "",
-  password: "",
-  errorText: "",
-};
-
 function Signup() {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (state.username === "" || state.password === "") {
-      state.errorText = "Please fill out all the fields!";
-      setError(true);
+    if (!username || !password) {
+      setError("Please fill out all the fields!");
     } else {
-      setError(false);
       document.querySelector(`#submit-button`).classList.add("disabled");
 
       axios
         .post(`/api/users/create`, {
-          username: state.username,
-          password: state.password,
+          username: username,
+          password: password,
         })
-        .then((result) => {
+        .then(() => {
+          setError(null);
           navigate(`/login`);
         })
         .catch((err) => {
@@ -35,33 +30,23 @@ function Signup() {
           console.log(err);
           switch (err.response.status) {
             case 500:
-              state.errorText = "Internal Server Error";
-              setError(true);
+              setError("Internal Server Error, Please try again");
               break;
             case 413:
-              state.errorText = "Username maximum is 50 characters";
-              setError(true);
+              setError("Max Length for Username is 50 Characters");
               break;
             case 409:
-              state.errorText = "Username already exists!";
-              setError(true);
+              setError("Invalid Username");
               break;
-            case 404:
-              state.errorText = "Please fill out all the fields!";
-              setError(true);
+            case 422:
+              setError("Please fill out all the fields");
               break;
             default:
-              state.errorText = "Something went wrong, please try again!";
-              setError(true);
+              setError("Something went wrong, please try again");
               break;
           }
         });
     }
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    state[name] = value;
   };
 
   return (
@@ -72,7 +57,7 @@ function Signup() {
           className="col-lg-4 mx-auto my-3 bg-light shadow p-5 rounded border"
           onSubmit={handleSubmit}
         >
-          {error ? <Alert text={state.errorText} /> : null}
+          {error && <Alert text={error} />}
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
               Username
@@ -83,7 +68,7 @@ function Signup() {
               className="form-control"
               id="username"
               aria-describedby="emailHelp"
-              onChange={handleChange}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -95,7 +80,7 @@ function Signup() {
               type="password"
               className="form-control"
               id="password"
-              onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <button type="submit" id="submit-button" className="btn btn-primary">
