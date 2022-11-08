@@ -85,4 +85,5 @@ This will start the client and open your default browser pointing to the hosted 
 
 1. Add Error Handling for Axios requests
 2. Add Comments
-3. Finish styling docs
+3. Add Settings Page
+4. Finish styling docs
