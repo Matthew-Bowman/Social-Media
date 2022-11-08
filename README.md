@@ -83,6 +83,7 @@ This will start the client and open your default browser pointing to the hosted 
 # To Do
 ---
 
+## Client
 1. Add Error Handling for Axios requests
     - Unchecked Pages/Components:
         1. Profile (Page)
@@ -92,4 +93,6 @@ This will start the client and open your default browser pointing to the hosted 
         5. Post (Component)
 2. Add Comments
 3. Add Settings Page
-4. Finish styling docs
+
+## Server
+1. Finish styling docs
