@@ -9,36 +9,38 @@ function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [inputs, setInputs] = useState({
-    username: "",
-  });
+  const [username, setUsername] = useState("");
 
-  const sendLogout = async () => {
-    const res = await axios.post("/api/me/logout", null, {
-      withCredentials: true,
+  const sendLogout = () => {
+    return new Promise((resolve, reject) => {
+      axios
+        .post("/api/me/logout")
+        .then((response) => resolve(response))
+        .catch((err) => reject(err));
     });
-
-    if (res.status === 200) {
-      return res;
-    }
-
-    return new Error("Unable to logout, please try again!");
   };
 
   const handleLogout = () => {
-    sendLogout().then(() => dispatch(authActions.logout()));
-  };
-
-  const handleChange = (e) => {
-    setInputs((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    sendLogout()
+      .then(() => dispatch(authActions.logout()))
+      .catch((err) => {
+        switch (err.response.status) {
+          case 401:
+            navigate("/login");
+            break;
+          case 422:
+            navigate("/login");
+            break;
+          default:
+            navigate("/login");
+            break;
+        }
+      });
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`profile/${inputs.username}`);
+    navigate(`profile/${username}`);
   };
 
   return (
@@ -73,7 +75,7 @@ function Navbar() {
                   placeholder="Search Users"
                   aria-label="Search Users"
                   name="username"
-                  onChange={handleChange}
+                  onChange={(e) => setUsername(e.target.value)}
                   autoComplete="off"
                 />
               </div>
